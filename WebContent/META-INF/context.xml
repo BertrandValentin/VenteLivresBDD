@@ -1,4 +1,4 @@
-<Context path="/TestWeb" docBase="TestWeb" reloadable="true"
+<Context path="/VenteLivresBDD" docBase="VenteLivresBDD" reloadable="true"
 crossContext="true">
 <!-- maxActive: Maximum number of dB connections in pool. Make sure you
 configure your mysqld max_connections large enough to handle
