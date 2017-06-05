@@ -3,6 +3,17 @@
 	<persistence-unit name="VenteLivresBDD"  transaction-type="JTA">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<jta-data-source>java:comp/env/jdbc/VenteLivresBDD</jta-data-source>
+		<class>be.atc.entities.Author</class>
+		<class>be.atc.entities.Book</class>
+		<class>be.atc.entities.Category</class>
+		<class>be.atc.entities.Editor</class>
+		<class>be.atc.entities.Locality</class>
+		<class>be.atc.entities.Order</class>
+		<class>be.atc.entities.Orderline</class>
+		<class>be.atc.entities.Orderstatus</class>
+		<class>be.atc.entities.Orderstatushistory</class>
+		<class>be.atc.entities.Role</class>
+		<class>be.atc.entities.User</class>
 		
 		<properties>
 			<property name="eclipselink.ddl-generation.output-mode" value="database"/>
