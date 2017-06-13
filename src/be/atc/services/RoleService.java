@@ -20,38 +20,40 @@ public class RoleService {
 	}
 	
 	public Role createRole(Role role){
-		Role roleSrv = new Role();
-		roleSrv.setIdRole(0);
-		roleSrv.setIsActive(true);
-		roleSrv.setRoleName("bertrand");
-		roleSrv.setUsers(null);
-		return roleSrv;
+		Role roleTarget = new Role();
 		
+		return modifyRole(roleTarget, role);
 	}
 	
-	public void removeRole(int idRole){
-		Role roleSrv = new Role(); //Role.findRole(idRole);
-		if (roleSrv != null)
-			em.remove(roleSrv);
+	public void removeRole(Role role){
+		//si en argument int idRole
+		//Role roleSrv = new Role(); //Role.findRole(idRole);
+		if (em.find(Role.class, role.getIdRole()) != null)
+			em.remove(role);
 	}
 	
-	public Role modifyRole(Role role, String roleName){
-		role = em.find(Role.class, role.getIdRole());
+	public Role modifyRole(Role roleTarget, Role roleNew){
+		roleTarget = em.find(Role.class, roleTarget.getIdRole());
+		String roleNewName = roleNew.getRoleName();
 		
-		if(role != null & roleName.length() < ROLE_LENGTH_LIMIT){
-			role.setRoleName(roleName);
+		if(roleTarget != null & roleNewName.length() < ROLE_LENGTH_LIMIT){
+			roleTarget.setIdRole(roleNew.getIdRole());
+			roleTarget.setIsActive(roleNew.getIsActive());
+			roleTarget.setRoleName(roleNewName);
+			roleTarget.setUsers(roleNew.getUsers());
 		}
 		
-		return role;
+		return roleTarget;
 	}
 	
-	public Role findRole(int idRole){
-		return em.find(Role.class, idRole);
+	public Role findRole(Role role){
+		return em.find(Role.class, role.getIdRole());
 		
 	}
 	
 	public List<Role> findAllRoles(){
-		javax.persistence.TypedQuery<Role> query = (javax.persistence.TypedQuery<Role>) em.createQuery("SELECT r FROM Role r", Role.class);
+		javax.persistence.TypedQuery<Role> query = (javax.persistence.TypedQuery<Role>)
+										em.createQuery("SELECT * FROM Role", Role.class);
 		return query.getResultList();
 	}
 }
