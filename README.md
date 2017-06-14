@@ -1,6 +1,6 @@
 # Projet - Vente de livres
 
-Consulter issues pour tâches à faire.
+Consulter Github issues pour tâches à faire.
 
 ## Git workflow
 
@@ -38,7 +38,7 @@ git pull -u origin dev
 
 ### Eviter merge conflicts
 
-```
+```shell
 # quand vous avez fini de travailler sur une feature,
 # soyez bien sur votre branche
 # puis faites un rebase de dev vers votre branche pour avoir les dernières modifs
@@ -54,17 +54,60 @@ git rebase --skip
 # il ne devrait y avoir aucun conflit !
 # et l'historique git reste clean
 git checkout -dev
-git merge maBranche --no-ff
+git merge maBranche --no-ff # cette option évite certains conflits
 ```
 
 ### Commandes utiles
 
 **Editer le dernier commit** :
 
-```
+```shell
 # Plutôt que de faire un nouveau commit chaque fois que vous changez un caractère :
 git commit --amend
 # ça ouvre un éditeur de texte pour le message du dernier commit
 # éditez le message ou faites ctrl + x pour quitter
 # NE JAMAIS éditer un commit déjà push !
 ```
+
+**Voir les différences entre deux commits** :
+
+```shell
+# récupérez les hashs des 2 commits via 'git log'
+git diff commit1 commit2
+
+# voir les changements actuels sur les fichiers
+git diff
+git diff monFichier
+
+# voir les changements ajoutés via 'git add' (staged changes)
+git diff --cached
+git diff --cached monFichier
+```
+
+**Supprimer les changements pas encore commités** :
+
+Vous avez modifié un fichier, c'était une erreur. Faites :
+
+```shell
+# consultez les fichiers changés
+git status
+# éliminez les changements sur le fichier modifié par erreur :
+git checkout monFichier
+# note : utilisez tab pour la complétion automatique
+
+# si vous voulez rapidement éliminer TOUS les changements
+git stash && git stash --drop
+```
+
+**Eliminer le dernier commit** :
+
+Vous avez fait un mauvais commit, vous voulez l'éliminer. Si vous ne l'avez pas encore push, tapez :
+
+```shell
+git reset HEAD~
+# vérifiez que la modif est bien ce que vous vouliez :
+git log
+```
+
+
+
