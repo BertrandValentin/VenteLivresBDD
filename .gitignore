@@ -51,6 +51,7 @@ Temporary Items
 # =========================
 
 # generated files
-bastien.md
+build
 .idea
+.classpath
 VenteLivresBDD.iml
