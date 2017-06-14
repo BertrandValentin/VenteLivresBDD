@@ -15,8 +15,6 @@ Pushez d'abord sur la branche `dev`, ainsi tous les contributeurs peuvent pull l
 
 Evidemment, si vous ne faites que rajouter de la doc, des commentaires ou formater, vous pouvez pusher directement sans créer de branche.
 
-### Commandes
-
 ```shell
 # assurez vous que 
 # https://github.com/BertrandValentin/VenteLivresBDD.git
@@ -36,16 +34,20 @@ git pull -u origin uneAutreBranche
 
 # pensez à mettre à jour dev CHAQUE FOIS qu'il y a de nouveaux commits
 git pull -u origin dev
+```
 
+### Eviter merge conflicts
+
+```
 # quand vous avez fini de travailler sur une feature,
-# soyez bien sur votre branche,
+# soyez bien sur votre branche
 # puis faites un rebase de dev vers votre branche pour avoir les dernières modifs
 git rebase -i dev
 
 # si vous avez des conflits, réglez-les, puis :
 git rebase --continue
 
-# quand un rebase est terminé, vous pouvez taper :
+# quand un rebase est terminé (no more conflicts), vous pouvez taper :
 git rebase --skip
 
 # maintenant, mergez votre branche dans dev,
@@ -53,4 +55,16 @@ git rebase --skip
 # et l'historique git reste clean
 git checkout -dev
 git merge maBranche --no-ff
+```
+
+### Commandes utiles
+
+**Editer le dernier commit** :
+
+```
+# Plutôt que de faire un nouveau commit chaque fois que vous changez un caractère :
+git commit --amend
+# ça ouvre un éditeur de texte pour le message du dernier commit
+# éditez le message ou faites ctrl + x pour quitter
+# NE JAMAIS éditer un commit déjà push !
 ```
