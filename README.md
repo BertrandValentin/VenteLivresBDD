@@ -50,17 +50,18 @@ git push -u origin maBranche
 
 # pour télécharger une branche :
 git pull -u origin uneAutreBranche
-
-# pensez à mettre à jour dev CHAQUE FOIS qu'il y a de nouveaux commits
-git pull -u origin dev
 ```
 
 ### Eviter merge conflicts
 
 ```shell
 # quand vous avez fini de travailler sur une feature,
+# mettez la branche dev locale à jour (git pull)
 # soyez bien sur votre branche
 # puis faites un rebase de dev vers votre branche pour avoir les dernières modifs
+git checkout dev
+git pull dev
+git checkout maBranche
 git rebase -i dev
 
 # si vous avez des conflits, réglez-les, puis :
@@ -72,8 +73,12 @@ git rebase --skip
 # maintenant, mergez votre branche dans dev,
 # il ne devrait y avoir aucun conflit !
 # et l'historique git reste clean
-git checkout -dev
+git checkout dev
 git merge maBranche --no-ff # cette option évite certains conflits
+
+# quand vous avez terminé de travailler sur une feature,
+# détruisez votre branche
+git checkout -d maBranche
 ```
 
 ### Commandes utiles
