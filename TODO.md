@@ -49,6 +49,7 @@ Rédiger rapport, abordant les points suivants :
 - [ ] copies d'écran et explications
 - [ ] code Java en annexe (pdf)
 - [ ] code Sql en annexe (pdf)
+ 
 Documents à remettre :
 
 - [ ] imprimer 1 exemplaire papier (rapport + code en annexe)

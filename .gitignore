@@ -52,6 +52,7 @@ Temporary Items
 
 # generated files
 build
+_stash
 .idea
 .classpath
 VenteLivresBDD.iml
