@@ -48,7 +48,7 @@ git checkout -b maBranche
 # ensuite pushez les commits sur le repo
 git push -u origin maBranche
 
-# pour télécharger une branche :
+# pour télécharger une branche remote :
 git pull -u origin uneAutreBranche
 
 # pensez à mettre à jour dev CHAQUE FOIS qu'il y a de nouveaux commits
@@ -124,8 +124,6 @@ Vous avez fait un mauvais commit, vous voulez l'éliminer. Si vous ne l'avez pas
 
 ```shell
 git reset HEAD~
-# vérifiez que la modif est bien ce que vous vouliez :
-git log
 ```
 
 
