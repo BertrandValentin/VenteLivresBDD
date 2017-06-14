@@ -16,9 +16,11 @@ Features :
 
 - [ ] script SQL (structure)
 - [ ] script SQL (données de test)
+- [ ] générer projet Web Dynamic
 - [ ] classes d'entité (model)
 - [ ] services (controllers)
-- [ ] pages JSP (view)
+- [ ] utilisation des NamedQueries (voir PDF JPA)
+- [ ] pages JSP (view), avec utilisation des JSTL EL
 - [ ] validation des données (methods, regexes)
 - [ ] gestion des erreurs (try/catch/finally, throw, throws)
 - [ ] navigation entre pages (html)
@@ -32,6 +34,7 @@ Pas oublier :
 - [ ] respecter conventions de nommage (doc/ConventionsNommage.pdf)
 - [ ] appliquer SQL guidelines (Google + MySQL)
 - [ ] appliquer Java guidelines (Oracle + Google)
+- [ ] si requêtes dynamiques, les justifier
 
 ## Rapport
 
