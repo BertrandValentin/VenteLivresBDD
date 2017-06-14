@@ -1,6 +1,25 @@
 # Projet - Vente de livres
 
-Consulter Github issues pour tâches à faire.
+Consulter [to-do list](TODO.md) pour tâches à faire.
+
+## Guidelines
+
+SQL :
+
+* [Coding guidelines](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_CODING_GUIDELINES.html)
+* [Style guide](http://www.sqlstyle.guide/)
+* [Security](https://dev.mysql.com/doc/refman/5.7/en/security-guidelines.html)
+
+Code styles :
+
+* [Java](https://google.github.io/styleguide/javaguide.html)
+* [HTML/CSS](https://google.github.io/styleguide/htmlcssguide.html)
+* [JavaScript](https://google.github.io/styleguide/jsguide.html)
+* [XML/XHTML](https://google.github.io/styleguide/xmlstyle.html)
+
+Linting : 
+
+* TODO: intégrer [ce fichier](https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml) (Google's Eclipse style)
 
 ## Git workflow
 
