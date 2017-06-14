@@ -22,9 +22,16 @@ Features :
 - [ ] validation des données (methods, regexes)
 - [ ] gestion des erreurs (try/catch/finally, throw, throws)
 - [ ] navigation entre pages (html)
-- [ ] tests (facultatifs)
+- [ ] **facultatif**: tests (JUnit)
+- [ ] **facultatif**: tests (Travis)
 - [ ] utilisation de Log4J
 - [ ] commentaires JavaDoc complets
+
+Pas oublier :
+
+- [ ] respecter conventions de nommage (doc/ConventionsNommage.pdf)
+- [ ] appliquer SQL guidelines (Google + MySQL)
+- [ ] appliquer Java guidelines (Oracle + Google)
 
 ## Rapport
 
