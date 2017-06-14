@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="VenteLivresBDD"  transaction-type="JTA">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<jta-data-source>java:comp/env/jdbc/VenteLivresBDD</jta-data-source>
+		<class>be.atc.entities.Author</class>
+		<class>be.atc.entities.Book</class>
+		<class>be.atc.entities.Category</class>
+		<class>be.atc.entities.Editor</class>
+		<class>be.atc.entities.Locality</class>
+		<class>be.atc.entities.Order</class>
+		<class>be.atc.entities.Orderline</class>
+		<class>be.atc.entities.Orderstatus</class>
+		<class>be.atc.entities.Orderstatushistory</class>
+		<class>be.atc.entities.Role</class>
+		<class>be.atc.entities.User</class>
+		
+		<properties>
+			<property name="eclipselink.ddl-generation.output-mode" value="database"/>
+			<property name="eclipselink.ddl-generation" value="create-tables"/>				
+		</properties>	
+	</persistence-unit>
+</persistence>
