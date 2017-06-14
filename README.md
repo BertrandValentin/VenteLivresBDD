@@ -125,7 +125,7 @@ git stash && git stash --drop
 
 **Eliminer le dernier commit** :
 
-Vous avez fait un mauvais commit, vous voulez l'éliminer. Si vous ne l'avez pas encore push, tapez :
+Vous avez fait un mauvais commit, vous voulez le supprimer. Si vous ne l'avez pas encore push, tapez :
 
 ```shell
 git reset HEAD~
