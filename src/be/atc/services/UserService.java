@@ -35,7 +35,7 @@ public class UserService {
 	}
 	
 	public List<User> findAllUsers(){
-		javax.persistence.TypedQuery<User> query = (javax.persistence.TypedQuery<User>) em.createQuery("SELECT * FROM User;", User.class);
+		javax.persistence.TypedQuery<User> query = (javax.persistence.TypedQuery<User>) em.createQuery("SELECT u FROM User u", User.class);
 		return query.getResultList();
 	}
 }

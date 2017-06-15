@@ -35,7 +35,7 @@ public class CategoryService {
 	}
 	
 	public List<Category> findAllCategories(){
-		javax.persistence.TypedQuery<Category> query = (javax.persistence.TypedQuery<Category>) em.createQuery("SELECT * FROM Category;", Category.class);
+		javax.persistence.TypedQuery<Category> query = (javax.persistence.TypedQuery<Category>) em.createQuery("SELECT c FROM Category c", Category.class);
 		return query.getResultList();
 	}
 }

@@ -35,7 +35,7 @@ public class EditorService {
 	}
 	
 	public List<Editor> findAllEditors(){
-		javax.persistence.TypedQuery<Editor> query = (javax.persistence.TypedQuery<Editor>) em.createQuery("SELECT * FROM Editor;", Editor.class);
+		javax.persistence.TypedQuery<Editor> query = (javax.persistence.TypedQuery<Editor>) em.createQuery("SELECT e FROM Editor e", Editor.class);
 		return query.getResultList();
 	}
 }

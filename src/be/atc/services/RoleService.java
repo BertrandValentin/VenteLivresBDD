@@ -53,7 +53,7 @@ public class RoleService {
 	
 	public List<Role> findAllRoles(){
 		javax.persistence.TypedQuery<Role> query = (javax.persistence.TypedQuery<Role>)
-										em.createQuery("SELECT * FROM Role", Role.class);
+										em.createQuery("SELECT r FROM Role r", Role.class);
 		return query.getResultList();
 	}
 }

@@ -35,7 +35,7 @@ public class LocalityService {
 	}
 	
 	public List<Locality> findAllLocalities(){
-		javax.persistence.TypedQuery<Locality> query = (javax.persistence.TypedQuery<Locality>) em.createQuery("SELECT * FROM Locality;", Locality.class);
+		javax.persistence.TypedQuery<Locality> query = (javax.persistence.TypedQuery<Locality>) em.createQuery("SELECT l FROM Locality l", Locality.class);
 		return query.getResultList();
 	}
 }

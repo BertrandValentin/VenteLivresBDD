@@ -35,7 +35,7 @@ public class BookService {
 	}
 	
 	public List<Book> findAllBooks(){
-		javax.persistence.TypedQuery<Book> query = (javax.persistence.TypedQuery<Book>) em.createQuery("SELECT * FROM Book;", Book.class);
+		javax.persistence.TypedQuery<Book> query = (javax.persistence.TypedQuery<Book>) em.createQuery("SELECT b FROM Book b", Book.class);
 		return query.getResultList();
 	}
 }

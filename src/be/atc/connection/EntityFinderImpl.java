@@ -48,6 +48,10 @@ public class EntityFinderImpl<T> implements EntityFinder<T>, Serializable {
 		return t;
 	}
 	
+	/**
+	 * le dernier parametre est une liste qui peut-être mise à null si la requête ne
+	 * nécéssite pas de paramètres
+	 */
 	@Override
 	public <K, V> List<T> findByNamedQuery(String namedQuery, T t, Map<K, V> param) {
 		

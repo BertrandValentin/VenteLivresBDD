@@ -35,7 +35,7 @@ public class AuthorService {
 	}
 	
 	public List<Author> findAllAuthors(){
-		javax.persistence.TypedQuery<Author> query = (javax.persistence.TypedQuery<Author>) em.createQuery("SELECT * FROM Author;", Author.class);
+		javax.persistence.TypedQuery<Author> query = (javax.persistence.TypedQuery<Author>) em.createQuery("SELECT a FROM Author a", Author.class);
 		return query.getResultList();
 	}
 }

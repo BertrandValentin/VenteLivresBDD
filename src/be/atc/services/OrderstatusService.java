@@ -35,7 +35,7 @@ public class OrderstatusService {
 	}
 	
 	public List<Orderstatus> findAllLocalities(){
-		javax.persistence.TypedQuery<Orderstatus> query = (javax.persistence.TypedQuery<Orderstatus>) em.createQuery("SELECT * FROM Orderstatus;", Orderstatus.class);
+		javax.persistence.TypedQuery<Orderstatus> query = (javax.persistence.TypedQuery<Orderstatus>) em.createQuery("SELECT os FROM Orderstatus os", Orderstatus.class);
 		return query.getResultList();
 	}
 }

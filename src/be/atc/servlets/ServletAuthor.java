@@ -1,6 +1,8 @@
 package be.atc.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +31,13 @@ public class ServletAuthor extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.debug("test");
+		response.setContentType("text/html");
+		PrintWriter out=response.getWriter();
+		//out.println("<html><body>");
+		out.println("<h1>MaServlet1 en GET</h1>");
+		//out.println("</body></html>");
+		out.flush();
+		out.close();
 	}
 
 	/**

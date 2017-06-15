@@ -35,7 +35,7 @@ public class OrderlineService {
 	}
 	
 	public List<Orderline> findAllLocalities(){
-		javax.persistence.TypedQuery<Orderline> query = (javax.persistence.TypedQuery<Orderline>) em.createQuery("SELECT * FROM Orderline;", Orderline.class);
+		javax.persistence.TypedQuery<Orderline> query = (javax.persistence.TypedQuery<Orderline>) em.createQuery("SELECT ol FROM Orderline ol", Orderline.class);
 		return query.getResultList();
 	}
 }
