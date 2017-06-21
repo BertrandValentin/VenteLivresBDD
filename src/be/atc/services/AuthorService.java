@@ -9,14 +9,16 @@ import be.atc.entities.Author;
 public class AuthorService {
 	protected EntityManager em;
 
-	AuthorService(EntityManager em){
+	public AuthorService(EntityManager em){
 		this.em = em;
 	}
 	
 	public Author createAuthor(Author author){
-		Author authorTarget = new Author();
+		//Author authorTarget = new Author();
+		em.persist(author);
 		
-		return modifyAuthor(authorTarget, author);
+		return author;
+		//return modifyAuthor(authorTarget, author);
 	}
 	
 	public void removeAuthor(Author author){

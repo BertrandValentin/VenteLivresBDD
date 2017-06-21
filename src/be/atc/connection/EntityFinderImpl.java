@@ -15,12 +15,8 @@ import org.apache.log4j.Logger;
  * @author Renaud DIANA
  */
 public class EntityFinderImpl<T> implements EntityFinder<T>, Serializable {
-
 	private static final long serialVersionUID = 1L;
 
-	/**
-     * Default constructor
-     */
 	public EntityFinderImpl(){
 		super();
 	}
@@ -28,17 +24,15 @@ public class EntityFinderImpl<T> implements EntityFinder<T>, Serializable {
 	// Log4j
 	private static final Logger log = Logger.getLogger(EntityFinderImpl. class);
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public T findOne(T t, int id) {
 		
 		EntityManager em = EMF.getEM();		
 		Class<? extends Object> ec = t.getClass();
 		try {
-	        
 	    	t = (T)em.find(ec, id);
-	    	
 	    	em.clear();
-	    	
 	    	log.debug("Bean " + t + " find from database: Ok");
 	    } finally {
 	        em.close();
@@ -52,6 +46,7 @@ public class EntityFinderImpl<T> implements EntityFinder<T>, Serializable {
 	 * le dernier parametre est une liste qui peut-être mise à null si la requête ne
 	 * nécéssite pas de paramètres
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> List<T> findByNamedQuery(String namedQuery, T t, Map<K, V> param) {
 		
@@ -79,6 +74,7 @@ public class EntityFinderImpl<T> implements EntityFinder<T>, Serializable {
 		return listT;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public <K, V> List<T> findByCustomQuery(String customQuery, T t, Map<K, V> param) {
 		

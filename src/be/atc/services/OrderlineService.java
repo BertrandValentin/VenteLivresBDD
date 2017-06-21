@@ -14,9 +14,9 @@ public class OrderlineService {
 	}
 	
 	public Orderline createOrderLine(Orderline orderLine){
-		Orderline orderLineTarget = new Orderline();
+		em.persist(orderLine);
 		
-		return modifyOrderLine(orderLineTarget, orderLine);
+		return orderLine;
 	}
 	
 	public void removeOrderLine(Orderline orderLine){

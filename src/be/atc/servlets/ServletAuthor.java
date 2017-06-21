@@ -3,6 +3,7 @@ package be.atc.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+
+import be.atc.connection.EMF;
+import be.atc.entities.Author;
+import be.atc.services.AuthorService;
 
 /**
  * Servlet implementation class ServletAuthor
@@ -30,14 +35,35 @@ public class ServletAuthor extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		log.debug("test");
+		log.debug("trying to display Nietzsche");
 		response.setContentType("text/html");
 		PrintWriter out=response.getWriter();
-		//out.println("<html><body>");
-		out.println("<h1>MaServlet1 en GET</h1>");
-		//out.println("</body></html>");
-		out.flush();
-		out.close();
+		/*EntityManagerFactory emf = Persistence.createEntityManagerFactory("AuthorService");
+		EntityManager em = emf.createEntityManager();*/
+		EntityManager em = EMF.getEM();
+		try{
+			//bloque pour lancer un rollback si erreur
+			em.getTransaction().begin();
+			AuthorService serv = new AuthorService(em);
+			//fin de bloque
+			em.getTransaction().commit();
+			Author fn = new Author();
+			
+			fn.setIdAuthor(0);
+			fn = serv.findAuthor(fn);
+			
+			out.println("<html><body>");
+			out.println("<h1>" + fn.getLastName() + " " + fn.getFirstName() + "</h1>");
+			out.println("</body></html>");
+			out.flush();
+			out.close();
+		}
+		finally {
+			if (em.getTransaction().isActive()){
+				em.getTransaction().rollback();
+			}
+			em.close();
+		}
 	}
 
 	/**
@@ -47,5 +73,4 @@ public class ServletAuthor extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

@@ -14,9 +14,9 @@ public class UserService {
 	}
 	
 	public User createUser(User user){
-		User userTarget = new User();
+		em.persist(user);
 		
-		return modifyUser(userTarget, user);
+		return user;
 	}
 	
 	public void removeUser(User user){

@@ -14,9 +14,9 @@ public class LocalityService {
 	}
 	
 	public Locality createLocality(Locality locality){
-		Locality localityTarget = new Locality();
+		em.persist(locality);
 		
-		return modifyLocality(localityTarget, locality);
+		return locality;
 	}
 	
 	public void removeLocality(Locality locality){

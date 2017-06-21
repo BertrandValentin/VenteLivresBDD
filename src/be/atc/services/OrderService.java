@@ -14,9 +14,9 @@ public class OrderService {
 	}
 	
 	public Order createOrder(Order order){
-		Order orderTarget = new Order();
+		em.persist(order);
 		
-		return modifyOrder(orderTarget, order);
+		return order;
 	}
 	
 	public void removeOrder(Order order){

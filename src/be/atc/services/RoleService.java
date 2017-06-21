@@ -20,9 +20,9 @@ public class RoleService {
 	}
 	
 	public Role createRole(Role role){
-		Role roleTarget = new Role();
+		em.persist(role);
 		
-		return modifyRole(roleTarget, role);
+		return role;
 	}
 	
 	public void removeRole(Role role){

@@ -14,9 +14,9 @@ public class OrderstatusService {
 	}
 	
 	public Orderstatus createOrderstatus(Orderstatus orderStatus){
-		Orderstatus orderStatusTarget = new Orderstatus();
+		em.persist(orderStatus);
 		
-		return modifyOrderStatus(orderStatusTarget, orderStatus);
+		return orderStatus;
 	}
 	
 	public void removeOrderStatus(Orderstatus orderStatus){

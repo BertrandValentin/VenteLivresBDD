@@ -16,7 +16,7 @@
 			connexion :
 		</p>
 		<form action="ServletUser" method="post">
-			<input type="text" name="userName"></value>
+			<input type="text" name="userName"></input><!-- </value>  -->
 			<input type="text" name="userPassword"></input>
 			<input type="submit"/>
 		</form>
@@ -26,10 +26,10 @@
 		</p>
 		<form action="ServletRole" method="get">
 			<input type="text" name="roleName"><!-- unknown tag value: </value>  -->
-			<!-- <input type="text" name="roleName" value="${sessionScope['roleUpdate'].roleName}" /> -->
+			<input type="text" name="roleName" value="${sessionScope['roleUpdate'].roleName}" />
 			<!-- <input type="text" name="roleName">${sessionScope.roleUpdate.roleName}" </value> -->
 			<input type="submit"/>
 		</form>
-		<a href="ServletRole">ServletRole</a>
+		<a href="ServletAuthor">ServletAuthor</a>
 </body>
 </html>

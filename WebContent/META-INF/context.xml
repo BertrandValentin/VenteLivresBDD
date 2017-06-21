@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE project>
 <Context path="/VenteLivresBDD" docBase="VenteLivresBDD" reloadable="true"
 crossContext="true">
 <!-- maxActive: Maximum number of dB connections in pool. Make sure you
@@ -12,8 +14,7 @@ and the minEvictableIdleTimeMillis configuration parameter.
 in ms, in this example 10 seconds. An Exception is thrown if
 this timeout is exceeded. Set to -1 to wait indefinitely.
 -->
-<!-- username and password: MySQL dB username and password for dB
-connections -->
+<!-- username and password: MySQL dB username and password for dB connections -->
 <!-- driverClassName: Class name for the old mm.mysql JDBC driver is
 org.gjt.mm.mysql.Driver - we recommend using Connector/J though.
 Class name for the official MySQL Connector/J driver is

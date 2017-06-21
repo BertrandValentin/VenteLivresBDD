@@ -14,9 +14,9 @@ public class OrderstatushistoryService {
 	}
 	
 	public Orderstatushistory createOrderStatusHistory(Orderstatushistory orderStatusHistory){
-		Orderstatushistory orderStatusHistoryTarget = new Orderstatushistory();
+		em.persist(orderStatusHistory);
 		
-		return modifyOrderStatusHistory(orderStatusHistoryTarget, orderStatusHistory);
+		return orderStatusHistory;
 	}
 	
 	public void removeOrderStatus(Orderstatushistory orderStatusHistory){

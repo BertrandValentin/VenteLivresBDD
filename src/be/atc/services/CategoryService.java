@@ -14,9 +14,9 @@ public class CategoryService {
 	}
 	
 	public Category createCategory(Category category){
-		Category categoryTarget = new Category();
+		em.persist(category);
 		
-		return modifyCategory(categoryTarget, category);
+		return category;
 	}
 	
 	public void removeCategory(Category category){

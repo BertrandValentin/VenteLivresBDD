@@ -14,9 +14,9 @@ public class BookService {
 	}
 	
 	public Book createBook(Book book){
-		Book bookTarget = new Book();
+		em.persist(book);
 		
-		return modifyBook(bookTarget, book);
+		return book;
 	}
 	
 	public void removeAuthor(Book book){

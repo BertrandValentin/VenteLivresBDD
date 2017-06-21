@@ -14,9 +14,9 @@ public class EditorService {
 	}
 	
 	public Editor createEditor(Editor editor){
-		Editor editorTarget = new Editor();
+		em.persist(editor);
 		
-		return modifyEditor(editorTarget, editor);
+		return editor;
 	}
 	
 	public void removeEditor(Editor editor){
