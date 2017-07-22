@@ -9,7 +9,7 @@ import be.atc.entities.Book;
 public class BookService {
 	protected EntityManager em;
 
-	BookService(EntityManager em){
+	public BookService(EntityManager em){
 		this.em = em;
 	}
 	

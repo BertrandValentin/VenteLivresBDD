@@ -19,6 +19,9 @@ public class Book implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
 	private int idBook;
+	
+	@Column(length=120, nullable=false)
+	private String title;
 
 	private boolean isActive;
 
@@ -52,6 +55,14 @@ public class Book implements Serializable {
 
 	public void setIdBook(int idBook) {
 		this.idBook = idBook;
+	}
+	
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public boolean getIsActive() {

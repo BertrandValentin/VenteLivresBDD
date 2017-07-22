@@ -49,7 +49,7 @@ public class ServletAuthor extends HttpServlet {
 			em.getTransaction().commit();
 			Author fn = new Author();
 			
-			fn.setIdAuthor(0);
+			fn.setIdAuthor(1);
 			fn = serv.findAuthor(fn);
 			
 			out.println("<html><body>");
