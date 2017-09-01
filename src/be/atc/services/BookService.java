@@ -1,9 +1,7 @@
 package be.atc.services;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
-
 import be.atc.entities.Book;
 
 public class BookService {

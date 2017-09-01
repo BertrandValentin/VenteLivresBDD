@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import be.atc.connection.EMF;
-import be.atc.entities.Book;
 import be.atc.services.BookService;
 
 /**
@@ -28,33 +27,35 @@ public class ServletBook extends HttpServlet {
      */
     public ServletBook() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		log.debug("trying to display Nietzsche");
+		log.debug("trying to display all books");
 		response.setContentType("text/html");
 		PrintWriter out=response.getWriter();
-		/*EntityManagerFactory emf = Persistence.createEntityManagerFactory("BookService");
-		EntityManager em = emf.createEntityManager();*/
 		EntityManager em = EMF.getEM();
+		
 		try{
-			log.debug("bloque pour lancer un rollback si erreur - debut");
 			em.getTransaction().begin();
 			BookService serv = new BookService(em);
-			log.debug("bloque pour lancer un rollback si erreur - fin");
 			em.getTransaction().commit();
-			Book books = new Book();
 			
-			books.setIdBook(0);
-			books = serv.findBook(books);
+			/*
+			//arrayBooks = "<table><tr><th>Identifiant</th><th>Titre</th><th>Auteur</th><th>prix</th><th>Cat&eacute;gorie</th><th>Editeur</th><th>Actif</th></tr>";
+			List<Book> booksList = serv.findAllBooks();
+			log.debug("starting to fill the array - " + arrayBooks);
+			for (Book b : booksList)
+				arrayBooks += b.toStringTable();
+			//arrayBooks += "</table>";
+			log.debug("array filled - " + arrayBooks);
+			*/
 			
-			out.println("<html><body>");
-			out.println("<h1>" + books.getAuthor() + " " + books.getTitle() + "</h1>");
-			out.println("</body></html>");
+			request.setAttribute("allBooks", serv.findAllBooks());
+			this.getServletContext().getRequestDispatcher("/VIEW/books.jsp").forward(request, response);
+			
 			out.flush();
 			out.close();
 		}
@@ -71,7 +72,6 @@ public class ServletBook extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 }

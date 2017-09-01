@@ -1,37 +1,18 @@
-package be.atc.entities;
+package be.atc.javabeans;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import be.atc.entities.Book;
+import be.atc.entities.Order;
 
-/**
- * The persistent class for the orderline database table.
- * 
- */
-@Entity
-@Table(name="orderline")
-@NamedQuery(name="Orderline.findAll", query="SELECT o FROM Orderline o")
-public class Orderline implements Serializable {
+public class OrderlineBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
 	private int idOrderLine;
-
 	private int quantity;
-
-	//bi-directional many-to-one association to Book
-	@ManyToOne
-	@JoinColumn(name="Book_IdBook", nullable=false)
 	private Book book;
-
-	//bi-directional many-to-one association to Order
-	@ManyToOne
-	@JoinColumn(name="Order_IdOrder", nullable=false)
 	private Order order;
 
-	public Orderline() {
+	public OrderlineBean() {
 	}
 
 	public int getIdOrderLine() {

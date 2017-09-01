@@ -17,12 +17,12 @@
 		</p>
 		<form action="ServletUser" method="post">
 			<input type="text" name="userName"></input><!-- </value>  -->
-			<input type="text" name="userPassword"></input>
+			<input type="password" name="userPassword"></input>
 			<input type="submit"/>
 		</form>
 		
 		<p>
-				tests lorem ipsum.
+			ajouter roleNname dans la session
 		</p>
 		<form action="ServletRole" method="get">
 			<input type="text" name="roleName"><!-- unknown tag value: </value>  -->
@@ -30,6 +30,9 @@
 			<!-- <input type="text" name="roleName">${sessionScope.roleUpdate.roleName}" </value> -->
 			<input type="submit"/>
 		</form>
-		<a href="ServletAuthor">ServletAuthor</a>
+		<a href="ServletAuthor">ServletAuthor</a><br />
+		<a href="ServletBook">ServletBook</a><br />
+		<a href="ServletOrder">order</a>
+		<a href="book_description.jsp">fiche</a>
 </body>
 </html>

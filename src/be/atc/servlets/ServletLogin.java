@@ -1,0 +1,66 @@
+package be.atc.servlets;
+
+import java.io.IOException;
+
+import javax.persistence.EntityManager;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+
+import be.atc.connection.EMF;
+import be.atc.entities.User;
+import be.atc.services.UserService;
+import be.atc.services.UserServiceException;
+
+@WebServlet("/ServletLogin")
+public class ServletLogin extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private static final Logger log = Logger.getLogger(ServletUser. class);
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		log.debug("trying to connect");
+		this.getServletContext().getRequestDispatcher("/VIEW/login.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		EntityManager em = EMF.getEM();
+		
+		try{
+			em.getTransaction().begin();
+			UserService userService = new UserService(em);
+			em.getTransaction().commit();
+			
+			try {
+				User user = userService.getUser(email, password);
+				HttpSession session = request.getSession();
+				session.setAttribute("email", user.getEmail());
+				session.setAttribute("role", user.getRole().getRoleName());
+				log.debug(session.getAttribute("email") + " - " + session.getAttribute("role"));
+				response.sendRedirect("/ServletBook");
+			} catch (UserServiceException e) {
+				request.setAttribute("error", e.getMessage());
+				this.getServletContext().getRequestDispatcher("/VIEW/login.jsp").forward(request, response);
+			}
+			//out.flush();
+			//out.close();
+		}
+		finally {
+			if (em.getTransaction().isActive()) {
+				em.getTransaction().rollback();
+				log.debug("transaction rolled back");
+			}
+			em.close();
+		}
+		
+	}
+}

@@ -1,0 +1,20 @@
+body{
+  color: white;
+  background-color: black;
+}
+
+/*********/
+/* table */
+/*********/
+
+table{
+  border: none;
+}
+
+th{
+  border: solid 2px white;
+}
+
+td{
+  border: dotted 1px white;
+}

@@ -1,53 +1,23 @@
-package be.atc.entities;
+package be.atc.javabeans;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+import be.atc.entities.Author;
+import be.atc.entities.Category;
+import be.atc.entities.Editor;
+import be.atc.entities.Orderline;
 
-
-/**
- * The persistent class for the book database table.
- * 
- */
-@Entity
-@Table(name="book")
-@NamedQuery(name="Book.findAll", query="SELECT b FROM Book b")
-public class Book implements Serializable {
+public class BookBean implements Serializable{
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
-	private int idBook;
 	
-	@Column(length=120, nullable=false)
+	private int idBook;
 	private String title;
-
 	private boolean isActive;
-
 	private double price;
-
-	//bi-directional many-to-one association to Author
-	@ManyToOne
-	@JoinColumn(name="Author_IdAuthor", nullable=false)
 	private Author author;
-
-	//bi-directional many-to-one association to Category
-	@ManyToOne
-	@JoinColumn(name="Category_IdCategory", nullable=false)
 	private Category category;
-
-	//bi-directional many-to-one association to Editor
-	@ManyToOne
-	@JoinColumn(name="Editor_IdEditor", nullable=false)
 	private Editor editor;
-
-	//bi-directional many-to-one association to Orderline
-	@OneToMany(mappedBy="book")
 	private List<Orderline> orderlines;
-
-	public Book() {
-	}
 
 	public int getIdBook() {
 		return this.idBook;
@@ -56,7 +26,7 @@ public class Book implements Serializable {
 	public void setIdBook(int idBook) {
 		this.idBook = idBook;
 	}
-	
+		
 	public String getTitle() {
 		return this.title;
 	}
@@ -111,19 +81,5 @@ public class Book implements Serializable {
 
 	public void setOrderlines(List<Orderline> orderlines) {
 		this.orderlines = orderlines;
-	}
-
-	public Orderline addOrderline(Orderline orderline) {
-		getOrderlines().add(orderline);
-		orderline.setBook(this);
-
-		return orderline;
-	}
-
-	public Orderline removeOrderline(Orderline orderline) {
-		getOrderlines().remove(orderline);
-		orderline.setBook(null);
-
-		return orderline;
 	}
 }

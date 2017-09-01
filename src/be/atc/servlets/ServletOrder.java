@@ -28,6 +28,8 @@ public class ServletOrder extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//rediriger vers display_order.jsp
+		this.getServletContext().getRequestDispatcher("/WebContent/VIEW/display_order.jsp").forward(request, response);
 		log.debug("test");
 	}
 
