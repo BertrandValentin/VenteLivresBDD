@@ -36,6 +36,12 @@ public class AuthorService {
 		return em.find(Author.class, author.getIdAuthor());
 	}
 	
+	public Author findAuthorById(int id){
+		Author authorTmp = new Author();
+		authorTmp.setIdAuthor(id);
+		return findAuthor(authorTmp);
+	}
+	
 	public List<Author> findAllAuthors(){
 		javax.persistence.TypedQuery<Author> query = (javax.persistence.TypedQuery<Author>) em.createQuery("SELECT a FROM Author a", Author.class);
 		return query.getResultList();

@@ -77,5 +77,4 @@ public class Editor implements Serializable {
 
 		return book;
 	}
-
 }

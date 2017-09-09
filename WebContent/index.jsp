@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<c:redirect url="/VIEW/test.jsp"></c:redirect>
+	<c:redirect url="/login.jsp"></c:redirect>
 	<!-- REDIRECTION VERS LE REPERTOIRE SECURISE  -->
 </body>
 </html>

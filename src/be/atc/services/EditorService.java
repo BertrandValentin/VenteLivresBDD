@@ -9,7 +9,7 @@ import be.atc.entities.Editor;
 public class EditorService {
 	protected EntityManager em;
 
-	EditorService(EntityManager em){
+	public EditorService(EntityManager em){
 		this.em = em;
 	}
 	
@@ -30,8 +30,14 @@ public class EditorService {
 		return editorTarget;
 	}
 	
-	public Editor findCategory(Editor editor){
+	public Editor findEditor(Editor editor){
 		return em.find(Editor.class, editor.getIdEditor());
+	}
+	
+	public Editor findEditorById(int id){
+		Editor editorTmp = new Editor();
+		editorTmp.setIdEditor(id);
+		return findEditor(editorTmp);
 	}
 	
 	public List<Editor> findAllEditors(){

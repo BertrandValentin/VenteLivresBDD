@@ -5,16 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link type="text/css" rel="stylesheet" href="<c:url value="/VIEW/css/style.css"/>" />
 <title>Vente de livres - connexion</title>
 </head>
 <body>
 	<h1>Connexion</h1>
 
-	<form action="ServletLogin" method="post">
+	<form action="login" method="post">
 		Email:
-		<input type="text" name="email"></input><br />
+		<input type="text" name="email" value="e@mailinator.com"></input><br />
 		Mot de passe:
-		<input type="password" name="password"></input><br />
+		<input type="password" name="password" value="e"></input><br />
 		<input type="submit" value="Connexion" />
 	</form>
 	<c:out value="${error}" />

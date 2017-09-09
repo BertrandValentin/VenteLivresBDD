@@ -9,7 +9,7 @@ import be.atc.entities.Category;
 public class CategoryService {
 	protected EntityManager em;
 
-	CategoryService(EntityManager em){
+	public CategoryService(EntityManager em){
 		this.em = em;
 	}
 	
@@ -32,6 +32,12 @@ public class CategoryService {
 	
 	public Category findCategory(Category category){
 		return em.find(Category.class, category.getIdCategory());
+	}
+	
+	public Category findCategoryById(int id){
+		Category categoryTmp = new Category();
+		categoryTmp.setIdCategory(id);
+		return findCategory(categoryTmp);
 	}
 	
 	public List<Category> findAllCategories(){

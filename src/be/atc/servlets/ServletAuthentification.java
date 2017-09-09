@@ -48,7 +48,7 @@ public class ServletAuthentification extends HttpServlet {
 			out.println("Authentification incorrecte !");
 		}
 		//vérifier l’égalité des valeurs
-		if( (identifiant!=null && identifiant.equals(ident))
+		if ((identifiant!=null && identifiant.equals(ident))
 				&& (motdepasse!=null && motdepasse.equals(mdp)) )
 		{
 			out.println("Authentification correcte,  bienvenue : " + identifiant);

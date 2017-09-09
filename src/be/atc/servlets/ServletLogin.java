@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +17,7 @@ import be.atc.entities.User;
 import be.atc.services.UserService;
 import be.atc.services.UserServiceException;
 
-@WebServlet("/ServletLogin")
+
 public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(ServletUser. class);
@@ -46,13 +46,11 @@ public class ServletLogin extends HttpServlet {
 				session.setAttribute("email", user.getEmail());
 				session.setAttribute("role", user.getRole().getRoleName());
 				log.debug(session.getAttribute("email") + " - " + session.getAttribute("role"));
-				response.sendRedirect("/ServletBook");
+				response.sendRedirect("/VenteLivresBDD/book");
 			} catch (UserServiceException e) {
 				request.setAttribute("error", e.getMessage());
 				this.getServletContext().getRequestDispatcher("/VIEW/login.jsp").forward(request, response);
 			}
-			//out.flush();
-			//out.close();
 		}
 		finally {
 			if (em.getTransaction().isActive()) {
@@ -61,6 +59,5 @@ public class ServletLogin extends HttpServlet {
 			}
 			em.close();
 		}
-		
 	}
 }
