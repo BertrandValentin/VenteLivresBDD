@@ -55,7 +55,6 @@ public class ServletProfile extends HttpServlet {
 		int idLocality = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("locality"));
 		String country = request.getParameter("country").isEmpty() ? "" : request.getParameter("country");
 		boolean isActive = Utilities.getInstance().convertStringRequestParameterToBoolean(request.getParameter("isActive"));
-		log.debug(" * isActive=" + isActive);
 		log.debug(firstname + " - " + lastname + " - " + birthDate + " - " + email + " - " + phone +
 				 " - " + street + " - " + number + " - " + box + " - " + idLocality + " - " + country + " - " + isActive);
 		EntityManager em = EMF.getEM();

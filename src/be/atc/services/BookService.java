@@ -54,7 +54,7 @@ public class BookService {
 	}
 	
 	public Book updateBook(Book book, String title, Author author, Category category, Editor editor, double price, boolean isActive) throws BookServiceException{
-		validateBook(title, author, category, editor, price, isActive);
+		validateBook(title, author, category, editor, price);
 		
 		book.setTitle(title);
 		book.setAuthor(author);
@@ -70,7 +70,7 @@ public class BookService {
 		return book;
 	}
 	
-	public void validateBook(String title, Author author, Category category, Editor editor, double price, boolean isActive) throws BookServiceException {
+	public void validateBook(String title, Author author, Category category, Editor editor, double price) throws BookServiceException {
 		HashMap<String, String> errors = new HashMap<String, String>();
 		
 		if (title.length() < 1 || title.length() > 255)
@@ -81,12 +81,8 @@ public class BookService {
 			errors.put("categoryError", "Category cannot be null");//throw new BookServiceException("Category cannot be null");
 		if (editor == null)
 			errors.put("editorError", "Editor cannot be null");//throw new BookServiceException("Editor cannot be null");
-		if (price < 0.01 || price > 9999.99)
+		if (price < 0.01)
 			errors.put("priceError", "Wrong value for the price");//throw new BookServiceException("Wrong value for the price");
-		/*
-		if (isActive != Boolean.TRUE || isActive != Boolean.FALSE)
-			errors.put("isActiveError", "Wrong value for the disponibility");//throw new BookServiceException("Wrong value for the disponibility");
-		*/
 		
 		if (errors.size() > 0)
 			throw new BookServiceException(errors.toString());

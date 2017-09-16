@@ -50,7 +50,7 @@
 		<label for="isActive">Disponible</label>
 			<input tabindex="70" type="checkbox" name="isActive" value="True" <c:if test="${bookToEdit.getIsActive()}">checked</c:if> />
 		<br />
-		<input type="hidden" name="idBookToUpdate" value="${bookToEdit.getIdBook()}">
+		<input type="hidden" name="idBook" value="${bookToEdit.getIdBook()}">
 		<input type="submit" value="${bookToEdit.getIdBook() != null ? 'Modifier' : 'Cr&eacute;er'}" />
 	</fieldset>
 	</form>

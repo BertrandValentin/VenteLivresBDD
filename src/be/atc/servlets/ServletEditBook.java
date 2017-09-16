@@ -46,10 +46,9 @@ public class ServletEditBook extends HttpServlet {
 		int idAuthor = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("author"));
 		int idCategory = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("category"));
 		int idEditor = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("editor"));
-		double price = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("price"));
-		boolean isActive = request.getParameter("isActive") == "True" ? Boolean.TRUE : Boolean.FALSE;
-		log.debug(" * isActive=" + isActive);
-		int idBookToUpdate = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("idBookToUpdate"));
+		double price = Utilities.getInstance().convertStringRequestParameterToDouble(request.getParameter("price"));
+		boolean isActive = Utilities.getInstance().convertStringRequestParameterToBoolean(request.getParameter("isActive"));
+		int idBookToUpdate = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("idBook"));
 		
 		log.debug(title + " | " + idAuthor + " | " + idCategory + " | " + idEditor + " | " + price + " | " + isActive);
 		
@@ -93,7 +92,7 @@ public class ServletEditBook extends HttpServlet {
 	
 	private void prepareData(HttpServletRequest request) {
 		EntityManager em = EMF.getEM();
-		int idBookToUpdate = request.getParameter("idBook") == null  ? -1 : Integer.parseInt(request.getParameter("idBook"));
+		int idBookToUpdate = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("idBook"));
 		
 		AuthorService authorService = new AuthorService(em);
 		CategoryService categoryService = new CategoryService(em);
