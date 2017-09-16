@@ -43,8 +43,9 @@ public class ServletDeleteBook extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
 		
-		if(!session.getAttribute("role").toString().equals("admin")){
+		if(!user.getRole().getRoleName().equals("admin")){
 			response.sendRedirect("/VenteLivresBDD/book");
 			return ;
 		}
