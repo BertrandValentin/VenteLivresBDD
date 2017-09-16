@@ -1,6 +1,7 @@
 package be.atc.services;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -68,7 +69,20 @@ public class UserService {
 	}
 	
 	public User updateUser(User user, String firstName, String lastName, Date birthDate, String email, String phone,
-			String street, int number, String box, Locality locality, String country, boolean isActive){
+			String street, int number, String box, Locality locality, String country, boolean isActive) throws UserServiceException{
+		
+		updateNormalUser(user, firstName, lastName, birthDate, email, phone, street, number, box, locality, country);
+		
+		user.setIsActive(isActive);
+	
+		return user;
+	}
+
+	public void updateNormalUser(User user, String firstName, String lastName, Date birthDate, String email, String phone,
+			String street, int number, String box, Locality locality, String country) throws UserServiceException {
+		
+		validateUser(firstName, lastName, birthDate, email, phone, street, number, box, locality, country);
+		
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setBirthday(birthDate);
@@ -79,8 +93,34 @@ public class UserService {
 		user.setBox(box);
 		user.setLocality(locality);
 		user.setCountry(country);
-		user.setIsActive(isActive);
+	}
 	
-		return user;
+	public void validateUser(String firstname, String lastname, Date birthDate, String email, String phone,
+			String street, int number, String box, Locality locality, String country) throws UserServiceException
+	{
+		HashMap<String, String> errors = new HashMap<String, String>();
+		if(firstname.length() < 2 || firstname.length() > 255)
+			errors.put("firstnameError", "Wrong size for the firstname");
+		if(lastname.length() < 2 || lastname.length() > 255)
+			errors.put("lastError", "Wrong size for the lastname");
+		if(birthDate == null)
+			errors.put("dateError", "Date cannot be empty");
+		if(email.length() < 5 || email.length() > 50)
+			errors.put("mailError", "Wrong size for the email");
+		if(phone.length() < 9 || phone.length() > 50)
+			errors.put("phoneError", "Wrong size for the phone number");
+		if(street.length() < 2 || street.length() > 50)
+			errors.put("streetError", "Wrong size for the street");
+		if(number < 1 || number > 1000)
+			errors.put("numberError", "Wrong value for the number");
+		if(box.length() < 1 || box.length() > 10000)
+			errors.put("boxError", "Wrong value for the box");
+		if(locality == null)
+			errors.put("localityError", "The locality cannot be empty");
+		if(country.length() < 3 || country.length() > 50)
+			errors.put("countryError", "Wrong size for the country");
+		
+		if (errors.size() > 0)
+			throw new UserServiceException(errors.toString());
 	}
 }

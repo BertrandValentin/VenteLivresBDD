@@ -54,7 +54,7 @@
 		<input type="submit" value="${bookToEdit.getIdBook() != null ? 'Modifier' : 'Cr&eacute;er'}" />
 	</fieldset>
 	</form>
-	
+	<a href="/VenteLivresBDD/book">Annuler</a>
 	<c:out value="${errors}" />
 </body>
 </html>

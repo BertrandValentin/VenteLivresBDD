@@ -1,6 +1,9 @@
 package be.atc.servlets;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
@@ -34,26 +37,28 @@ public class ServletProfile extends HttpServlet {
 		this.getServletContext().getRequestDispatcher("/VIEW/user_profile.jsp").forward(request, response);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User userSession = (User)session.getAttribute("user");
 		
 		String firstname = request.getParameter("firstname").isEmpty() ? "" : request.getParameter("firstname");
 		String lastname = request.getParameter("lastname").isEmpty() ? "" : request.getParameter("lastname");
-		Date birthDate = request.getParameter("birthDate").isEmpty() ? null : Utilities.getInstance().stringToDate(request.getParameter("birthDate"));
+		Date birthDate = Utilities.getInstance().stringToDate(request.getParameter("birthDate"));
+		
 		log.debug(birthDate);
 		String email = request.getParameter("email").isEmpty() ? "" : request.getParameter("email");
 		String phone = request.getParameter("phone").isEmpty() ? "" : request.getParameter("phone");
 		String street = request.getParameter("street").isEmpty() ? "" : request.getParameter("street");
-		int number = request.getParameter("number").isEmpty() ? null : Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("number"));
+		int number = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("number"));
 		String box = request.getParameter("box").isEmpty() ? "" : request.getParameter("box");
-		int idLocality = request.getParameter("locality").isEmpty() ? null : Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("locality"));
+		int idLocality = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("locality"));
 		String country = request.getParameter("country").isEmpty() ? "" : request.getParameter("country");
-		boolean isActive = request.getParameter("isActive").isEmpty() ? false : request.getParameter("isActive") != null;
+		boolean isActive = request.getParameter("isActive") == null ? false : true;
+		log.debug(request.getParameter("isActive"));
 		
 		log.debug(firstname + " - " + lastname + " - " + birthDate + " - " + email + " - " + phone +
 				 " - " + street + " - " + number + " - " + box + " - " + idLocality + " - " + country + " - " + isActive);
-		
 		EntityManager em = EMF.getEM();
 		
 		Locality locality = new LocalityService(em).findLocalityById(idLocality);
@@ -64,16 +69,15 @@ public class ServletProfile extends HttpServlet {
 			UserService userService = new UserService(em);
 			
 			if (userSession != null) {
-				updateUser(userSession, userService, firstname, lastname, birthDate, email, phone, street, number, box, locality, country, isActive);
-				log.debug("date=" + userSession.getBirthday());
+				
+				User userUpdated = updateUser(userSession, userService, firstname, lastname, birthDate, email, phone, street, number, box, locality, country);
+				updateIsActiveUser(userUpdated, userSession, isActive);
 				em.getTransaction().commit();
+				session.setAttribute("user", userUpdated);
 			}
-			response.sendRedirect("/VenteLivresBDD/book");
 		}
 		catch (UserServiceException e) {
 			request.setAttribute("errors", e.getMessage());
-			prepareData(request);
-			this.getServletContext().getRequestDispatcher("/VIEW/editBook.jsp").forward(request, response);
 		}
 		finally {
 			if (em.getTransaction().isActive()) {
@@ -81,6 +85,8 @@ public class ServletProfile extends HttpServlet {
 				log.debug("transaction rolled back");
 			}
 			em.close();
+			prepareData(request);
+			this.getServletContext().getRequestDispatcher("/VIEW/user_profile.jsp").forward(request, response);
 		}
 	}
 	
@@ -90,18 +96,27 @@ public class ServletProfile extends HttpServlet {
 		EntityManager em = EMF.getEM();
 		LocalityService localityService = new LocalityService(em);
 		request.setAttribute("allLocalities", localityService.findAllLocalities());
+		
+		HttpSession session = request.getSession();
+		User userSession = (User)session.getAttribute("user");
+		
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		request.setAttribute("birthdateFormatted", df.format(userSession.getBirthday()));
+		
 		em.close();
 	}
-	/*
-	private void createUser(User user, UserService userService, String firstname, String lastname, Date birthDate, String email, String phone,
-			String street, int number, String box, Locality locality, String country, boolean isActive) throws UserServiceException {
-		userService.updateUser(user, firstname, lastname, birthDate, email, phone, street, number, box, locality, country, isActive);
-		userService.createUser(user);
+
+	private User updateUser(User user, UserService userService, String firstname, String lastname, Date birthDate, String email,
+			String phone, String street, int number, String box, Locality locality, String country) throws UserServiceException {
+		User userToUpdate = userService.findUser(user);
+		userService.updateNormalUser(userToUpdate, firstname, lastname, birthDate, email, phone, street, number, box, locality, country);
+	
+		return userToUpdate;
 	}
-	 */
-	private void updateUser(User user, UserService userService, String firstname, String lastname, Date birthDate, String email, String phone,
-			String street, int number, String box, Locality locality, String country, boolean isActive) throws UserServiceException {
-		log.debug("user.id=" + user.getIdUser() + " user.lastname=" + user.getLastName());
-		userService.updateUser(user, firstname, lastname, birthDate, email, phone, street, number, box, locality, country, isActive);
+	
+	private void updateIsActiveUser(User user, User userWhoAskedUpdate, boolean isActiveNewStatus){
+		if(userWhoAskedUpdate.getRole().getRoleName() == "admin"){
+			user.setIsActive(isActiveNewStatus);
+		}
 	}
 }

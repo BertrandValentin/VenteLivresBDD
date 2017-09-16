@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,8 +17,7 @@
 			<input type="text" name="lastname" tabindex="20" value="${sessionScope.user.getLastName()}" />
 			<br />
 			<label for="birthDate">Date de naissance</label>
-			<fmt:formatDate value="${sessionScope.user.getBirthday()}" var="formattedBirthdayDate" type="date" pattern="dd-mm-yyyy" />
-			<input type="text" name="birthDate" tabindex="30" value="${formattedBirthdayDate}" />
+			<input type="text" name="birthDate" tabindex="30" value="${birthdateFormatted}" />
 			<br />
 			<label for="email">Email</label>
 			<input type="text" name="email" tabindex="40" value="${sessionScope.user.getEmail()}" />
@@ -51,9 +49,11 @@
 			<label for="country">Pays</label>
 			<input type="text" name="country" tabindex="100" value="${sessionScope.user.getCountry()}" />
 			<br />
-			<label for="isActive">Actif</label>
-			<input type="text" name="isActive" tabindex="110" value="${sessionScope.user.getIsActive()}" />
-			<br />
+			<c:if test="${sessionScope.user.getRole().getRoleName() == 'admin'}">
+				<label for="isActive">Actif</label>
+				<input type="checkbox" name="isActive" value="True" tabindex="110" <c:if test="${sessionScope.user.getIsActive()}">checked</c:if> />
+				<br />
+			</c:if>
 			<input type="submit" value="Valider" />
 		</fieldset>
 	</form>
@@ -61,5 +61,6 @@
 	<a href="/VenteLivresBDD/password">Modifier le mot de passe</a>
 	<br />
 	<a href="/VenteLivresBDD/book">Annuler</a>
+	<c:out value="${errors}" />
 </body>
 </html>

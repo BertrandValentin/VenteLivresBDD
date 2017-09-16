@@ -43,12 +43,12 @@ public class ServletEditBook extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title").isEmpty() ? "" : request.getParameter("title");
-		int idAuthor = request.getParameter("author").isEmpty() ? null : Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("author"));
-		int idCategory = request.getParameter("category").isEmpty() ? null : Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("category"));
-		int idEditor = request.getParameter("editor").isEmpty() ? null : Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("editor"));
-		double price = request.getParameter("price").isEmpty() ? -0.1 : Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("price"));
-		boolean isActive = request.getParameter("isActive") == null ? Boolean.FALSE : Boolean.TRUE;
-		int idBookToUpdate = request.getParameter("idBookToUpdate").isEmpty() ? -1 : Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("idBookToUpdate"));
+		int idAuthor = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("author"));
+		int idCategory = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("category"));
+		int idEditor = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("editor"));
+		double price = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("price"));
+		boolean isActive = request.getParameter("isActive") == null ? false : true;
+		int idBookToUpdate = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("idBookToUpdate"));
 		
 		log.debug(title + " | " + idAuthor + " | " + idCategory + " | " + idEditor + " | " + price + " | " + isActive);
 		

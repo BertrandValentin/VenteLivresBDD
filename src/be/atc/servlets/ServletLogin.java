@@ -35,7 +35,6 @@ public class ServletLogin extends HttpServlet {
 		try{
 			em.getTransaction().begin();
 			UserService userService = new UserService(em);
-			em.getTransaction().commit();
 			
 			try {
 				User user = userService.getUser(email, password);
