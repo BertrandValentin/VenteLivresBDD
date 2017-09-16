@@ -12,7 +12,8 @@
 	<h1>all books</h1><br />
 	
 	<a href="/VenteLivresBDD/ServletDisconnection">D&eacute;connexion</a>
-	<c:if test="${sessionScope.role=='admin'}">
+	<a href="/VenteLivresBDD/profile">Modifier le profile <c:out value="${user.getLastName()}" /></a>
+	<c:if test="${sessionScope.user.getRole().getRoleName() == 'admin'}">
 		<a href="/VenteLivresBDD/editBook">Ajouter un livre</a><br />
 	</c:if>
 	
@@ -32,10 +33,10 @@
 				<td>Total</td>
 				<td><strong><c:out value="${sessionScope.basketTotal}" /></strong></td>
 			</tr>
-			<a href="/VenteLivresBDD/trashBasket" >
-				<input type="button" value="Vider le pannier" />
-			</a>
 	</table>
+		<a href="/VenteLivresBDD/trashBasket" >
+			<input type="button" value="Vider le panier" />
+		</a>
 	<br />
 	<table>
 		<caption>Liste des livres</caption>
@@ -66,7 +67,7 @@
 					<c:otherwise>Indisponible</c:otherwise>
 					</c:choose>
 				</td>
-           		<c:if test="${sessionScope.role=='admin'}">
+           		<c:if test="${sessionScope.user.getRole().getRoleName() == 'admin'}">
 					<td>
            				<a href="/VenteLivresBDD/editBook?idBook=<c:out value='${book.getIdBook()}' />" >
 							<input type="button" value="Modifier" />

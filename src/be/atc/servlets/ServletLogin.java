@@ -27,9 +27,6 @@ public class ServletLogin extends HttpServlet {
 		this.getServletContext().getRequestDispatcher("/VIEW/login.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -43,9 +40,8 @@ public class ServletLogin extends HttpServlet {
 			try {
 				User user = userService.getUser(email, password);
 				HttpSession session = request.getSession();
-				session.setAttribute("email", user.getEmail());
-				session.setAttribute("role", user.getRole().getRoleName());
-				log.debug(session.getAttribute("email") + " - " + session.getAttribute("role"));
+				session.setAttribute("user", user);
+				log.debug(user.getEmail() + " - " + user.getRole().getRoleName());
 				response.sendRedirect("/VenteLivresBDD/book");
 			} catch (UserServiceException e) {
 				request.setAttribute("error", e.getMessage());

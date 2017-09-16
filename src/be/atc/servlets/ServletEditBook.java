@@ -16,6 +16,7 @@ import be.atc.entities.Author;
 import be.atc.entities.Book;
 import be.atc.entities.Category;
 import be.atc.entities.Editor;
+import be.atc.entities.User;
 import be.atc.services.AuthorService;
 import be.atc.services.BookService;
 import be.atc.services.BookServiceException;
@@ -28,8 +29,9 @@ public class ServletEditBook extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
 		
-		if(!session.getAttribute("role").toString().equals("admin")){
+		if(!user.getRole().getRoleName().equals("admin")){
 			response.sendRedirect("/VenteLivresBDD/book");
 			return ;
 		}
@@ -41,12 +43,12 @@ public class ServletEditBook extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title").isEmpty() ? "" : request.getParameter("title");
-		int idAuthor = request.getParameter("author").isEmpty() ? null : Integer.parseInt(request.getParameter("author"));
-		int idCategory = request.getParameter("category").isEmpty() ? null : Integer.parseInt(request.getParameter("category"));
-		int idEditor = request.getParameter("editor").isEmpty() ? null : Integer.parseInt(request.getParameter("editor"));
-		double price = request.getParameter("price").isEmpty() ? -0.1 : Double.parseDouble(request.getParameter("price"));
+		int idAuthor = request.getParameter("author").isEmpty() ? null : Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("author"));
+		int idCategory = request.getParameter("category").isEmpty() ? null : Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("category"));
+		int idEditor = request.getParameter("editor").isEmpty() ? null : Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("editor"));
+		double price = request.getParameter("price").isEmpty() ? -0.1 : Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("price"));
 		boolean isActive = request.getParameter("isActive") == null ? Boolean.FALSE : Boolean.TRUE;
-		int idBookToUpdate = request.getParameter("idBookToUpdate").isEmpty() ? -1 : Integer.parseInt(request.getParameter("idBookToUpdate"));
+		int idBookToUpdate = request.getParameter("idBookToUpdate").isEmpty() ? -1 : Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("idBookToUpdate"));
 		
 		log.debug(title + " | " + idAuthor + " | " + idCategory + " | " + idEditor + " | " + price + " | " + isActive);
 		

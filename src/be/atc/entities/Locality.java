@@ -78,5 +78,4 @@ public class Locality implements Serializable {
 
 		return user;
 	}
-
 }

@@ -1,9 +1,11 @@
 package be.atc.services;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import be.atc.entities.Locality;
 import be.atc.entities.User;
 
 public class UserService {
@@ -57,5 +59,28 @@ public class UserService {
 		else if (userList.size() > 1)
 			throw new UserServiceException("Duplicated user");
 		return null;
+	}
+
+	public User findUserById(int id) {
+		User userToFind = new User();
+		userToFind.setIdUser(id);
+		return findUser(userToFind);
+	}
+	
+	public User updateUser(User user, String firstName, String lastName, Date birthDate, String email, String phone,
+			String street, int number, String box, Locality locality, String country, boolean isActive){
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setBirthday(birthDate);
+		user.setEmail(email);
+		user.setPersonalPhone(phone);
+		user.setStreet(street);
+		user.setNumber(number);
+		user.setBox(box);
+		user.setLocality(locality);
+		user.setCountry(country);
+		user.setIsActive(isActive);
+	
+		return user;
 	}
 }

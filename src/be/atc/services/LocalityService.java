@@ -9,7 +9,7 @@ import be.atc.entities.Locality;
 public class LocalityService {
 	protected EntityManager em;
 
-	LocalityService(EntityManager em){
+	public LocalityService(EntityManager em){
 		this.em = em;
 	}
 	
@@ -32,6 +32,12 @@ public class LocalityService {
 	
 	public Locality findLocality(Locality locality){
 		return em.find(Locality.class, locality.getIdLocality());
+	}
+	
+	public Locality findLocalityById(int id) {
+		Locality localityToFind = new Locality();
+		localityToFind.setIdLocality(id);
+		return findLocality(localityToFind);
 	}
 	
 	public List<Locality> findAllLocalities(){

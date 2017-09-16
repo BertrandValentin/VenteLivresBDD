@@ -1,7 +1,10 @@
 package be.atc.servlets;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Utilities {
-    
     private static Utilities INSTANCE;
     /**
      * Create private constructor
@@ -37,5 +40,33 @@ public class Utilities {
     			return -1;
     		}
     	}
+    }
+    
+    public double convertStringRequestParameterToDouble(String s){
+    	if(s == null || s.isEmpty()){
+    		return -1;
+    	}
+    	else {
+    		try{
+    			return Double.parseDouble(s);
+    		}
+    		catch (NumberFormatException e){
+    			e.getMessage();
+    			return -1.0;
+    		}
+    	}
+    }
+    
+    public Date stringToDate(String dateToConvert){
+    	SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+    	Date date = null;
+
+        try {
+            date = formatter.parse(dateToConvert);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        return date;
     }
 }
