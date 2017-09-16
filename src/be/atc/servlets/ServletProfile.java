@@ -54,9 +54,8 @@ public class ServletProfile extends HttpServlet {
 		String box = request.getParameter("box").isEmpty() ? "" : request.getParameter("box");
 		int idLocality = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("locality"));
 		String country = request.getParameter("country").isEmpty() ? "" : request.getParameter("country");
-		boolean isActive = request.getParameter("isActive") == null ? false : true;
-		log.debug(request.getParameter("isActive"));
-		
+		boolean isActive = Utilities.getInstance().convertStringRequestParameterToBoolean(request.getParameter("isActive"));
+		log.debug(" * isActive=" + isActive);
 		log.debug(firstname + " - " + lastname + " - " + birthDate + " - " + email + " - " + phone +
 				 " - " + street + " - " + number + " - " + box + " - " + idLocality + " - " + country + " - " + isActive);
 		EntityManager em = EMF.getEM();
@@ -115,7 +114,7 @@ public class ServletProfile extends HttpServlet {
 	}
 	
 	private void updateIsActiveUser(User user, User userWhoAskedUpdate, boolean isActiveNewStatus){
-		if(userWhoAskedUpdate.getRole().getRoleName() == "admin"){
+		if(userWhoAskedUpdate.getRole().getRoleName().equals("admin")){
 			user.setIsActive(isActiveNewStatus);
 		}
 	}

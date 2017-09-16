@@ -60,6 +60,15 @@ public class Utilities {
     	}
     }
     
+    public boolean convertStringRequestParameterToBoolean(String s){
+    	if(s == null || s.isEmpty()){
+    		return false;
+    	}
+    	else {
+    		return s.equals("True");
+    	}
+    }
+    
     public Date stringToDate(String dateToConvert){
     	log.debug(dateToConvert + " before");
     	

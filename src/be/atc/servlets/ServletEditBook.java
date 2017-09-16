@@ -47,7 +47,8 @@ public class ServletEditBook extends HttpServlet {
 		int idCategory = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("category"));
 		int idEditor = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("editor"));
 		double price = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("price"));
-		boolean isActive = request.getParameter("isActive") == null ? false : true;
+		boolean isActive = request.getParameter("isActive") == "True" ? Boolean.TRUE : Boolean.FALSE;
+		log.debug(" * isActive=" + isActive);
 		int idBookToUpdate = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("idBookToUpdate"));
 		
 		log.debug(title + " | " + idAuthor + " | " + idCategory + " | " + idEditor + " | " + price + " | " + isActive);
