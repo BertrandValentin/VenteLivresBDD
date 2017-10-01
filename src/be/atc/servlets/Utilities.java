@@ -26,7 +26,7 @@ public class Utilities {
     }
     
     /**
-     * take a String in parameters and returns a integer
+     * takes a String in parameters and returns a integer
      * if the String is not a number it returns -1
      * @return
      */
@@ -45,6 +45,12 @@ public class Utilities {
     	}
     }
     
+    /**
+     * takes a String in parameters and returns a Double object
+     * if the String is not a number it returns -1
+     * @param s
+     * @return
+     */
     public double convertStringRequestParameterToDouble(String s){
     	if(s == null || s.isEmpty()){
     		return -1;
@@ -60,6 +66,12 @@ public class Utilities {
     	}
     }
     
+    /**
+     * takes a String in parameters and returns a boolean
+     * if the String is not a number it returns -1
+     * @param s
+     * @return
+     */
     public boolean convertStringRequestParameterToBoolean(String s){
     	if(s == null || s.isEmpty()){
     		return false;
@@ -69,6 +81,12 @@ public class Utilities {
     	}
     }
     
+    /**
+     * takes a String in parameters and returns a Date object
+     * if the String is not a number it returns -1
+     * @param dateToConvert
+     * @return
+     */
     public Date stringToDate(String dateToConvert){
     	log.debug(dateToConvert + " before");
     	

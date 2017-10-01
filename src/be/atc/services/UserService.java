@@ -113,7 +113,7 @@ public class UserService {
 			errors.put("streetError", "Wrong size for the street");
 		if(number < 1 || number > 1000)
 			errors.put("numberError", "Wrong value for the number");
-		if(box.length() < 1 || box.length() > 10000)
+		if(box.length() < 1 || box.length() > 8)
 			errors.put("boxError", "Wrong value for the box");
 		if(locality == null)
 			errors.put("localityError", "The locality cannot be empty");

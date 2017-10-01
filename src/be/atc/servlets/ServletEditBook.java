@@ -27,6 +27,10 @@ public class ServletEditBook extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(ServletUser. class);
 
+	/**
+	 * verify if the connected user is an administrator, if not, sends back to the book list page.
+	 * send the user to an edition of book page.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
@@ -41,6 +45,9 @@ public class ServletEditBook extends HttpServlet {
 		this.getServletContext().getRequestDispatcher("/VIEW/editBook.jsp").forward(request, response);
 	}
 
+	/**
+	 * recovers the values of the inputs in the jsp and update the values in the database
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title").isEmpty() ? "" : request.getParameter("title");
 		int idAuthor = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("author"));
@@ -90,6 +97,12 @@ public class ServletEditBook extends HttpServlet {
 
 	/* ************************************* */
 	
+	/**
+	 * create a service to get the author, category and the editor from their respective table.
+	 * recover the other data from the book table to feed the inputs in the jsp.
+	 * if the id is egal to -1, it means that there was an error while recovering the data. 
+	 * @param request
+	 */
 	private void prepareData(HttpServletRequest request) {
 		EntityManager em = EMF.getEM();
 		int idBookToUpdate = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("idBook"));
@@ -112,6 +125,18 @@ public class ServletEditBook extends HttpServlet {
 		em.close();
 	}
 	
+	/**
+	 * this function is used to create a new book with a jsp with empty inputs.
+	 * @param title
+	 * @param price
+	 * @param isActive
+	 * @param author
+	 * @param category
+	 * @param editor
+	 * @param bookService
+	 * @param book
+	 * @throws BookServiceException
+	 */
 	private void createBook(String title, double price, boolean isActive, Author author, Category category,
 			Editor editor, BookService bookService, Book book) throws BookServiceException {
 		log.debug("* new *");
@@ -119,6 +144,19 @@ public class ServletEditBook extends HttpServlet {
 		bookService.createBook(book);
 	}
 
+	/**
+	 * this function is used to update the data from a book with the values of the inputs in the jsp.
+	 * @param title
+	 * @param price
+	 * @param isActive
+	 * @param idBookToUpdate
+	 * @param author
+	 * @param category
+	 * @param editor
+	 * @param bookService
+	 * @param book
+	 * @throws BookServiceException
+	 */
 	private void updateBook(String title, double price, boolean isActive, int idBookToUpdate, Author author,
 			Category category, Editor editor, BookService bookService, Book book) throws BookServiceException {
 		log.debug("* update * : " + idBookToUpdate);

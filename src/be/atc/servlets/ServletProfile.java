@@ -31,11 +31,19 @@ public class ServletProfile extends HttpServlet {
         super();
     }
 
+	/**
+	 * redirect the user on the profile page
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		prepareData(request);
 		this.getServletContext().getRequestDispatcher("/VIEW/user_profile.jsp").forward(request, response);
 	}
 
+	/**
+	 * feeds the inputs in the jsp with the data of the user table.
+	 * tries to update the data in db
+	 * if the user is admin, it is possible to change the value of the active attribute in the user table
+	 */
 	@SuppressWarnings("deprecation")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -45,7 +53,6 @@ public class ServletProfile extends HttpServlet {
 		String lastname = request.getParameter("lastname").isEmpty() ? "" : request.getParameter("lastname");
 		Date birthDate = Utilities.getInstance().stringToDate(request.getParameter("birthDate"));
 		
-		log.debug(birthDate);
 		String email = request.getParameter("email").isEmpty() ? "" : request.getParameter("email");
 		String phone = request.getParameter("phone").isEmpty() ? "" : request.getParameter("phone");
 		String street = request.getParameter("street").isEmpty() ? "" : request.getParameter("street");
@@ -71,6 +78,7 @@ public class ServletProfile extends HttpServlet {
 				updateIsActiveUser(userUpdated, userSession, isActive);
 				em.getTransaction().commit();
 				session.setAttribute("user", userUpdated);
+				request.setAttribute("errors", "Profile successfully changed");
 			}
 		}
 		catch (UserServiceException e) {
@@ -89,6 +97,10 @@ public class ServletProfile extends HttpServlet {
 	
 	/* ************************************* */
 	
+	/**
+	 * recovers the locality and the birthdate attributes in the user table
+	 * @param request
+	 */
 	private void prepareData(HttpServletRequest request) {
 		EntityManager em = EMF.getEM();
 		LocalityService localityService = new LocalityService(em);
@@ -103,6 +115,23 @@ public class ServletProfile extends HttpServlet {
 		em.close();
 	}
 
+	/**
+	 * update the user in the database
+	 * @param user
+	 * @param userService
+	 * @param firstname
+	 * @param lastname
+	 * @param birthDate
+	 * @param email
+	 * @param phone
+	 * @param street
+	 * @param number
+	 * @param box
+	 * @param locality
+	 * @param country
+	 * @return
+	 * @throws UserServiceException
+	 */
 	private User updateUser(User user, UserService userService, String firstname, String lastname, Date birthDate, String email,
 			String phone, String street, int number, String box, Locality locality, String country) throws UserServiceException {
 		User userToUpdate = userService.findUser(user);
@@ -111,6 +140,12 @@ public class ServletProfile extends HttpServlet {
 		return userToUpdate;
 	}
 	
+	/**
+	 * update the active attribute in the user table if the user is admin
+	 * @param user
+	 * @param userWhoAskedUpdate
+	 * @param isActiveNewStatus
+	 */
 	private void updateIsActiveUser(User user, User userWhoAskedUpdate, boolean isActiveNewStatus){
 		if(userWhoAskedUpdate.getRole().getRoleName().equals("admin")){
 			user.setIsActive(isActiveNewStatus);

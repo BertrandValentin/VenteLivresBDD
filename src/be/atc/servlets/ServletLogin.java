@@ -22,11 +22,17 @@ public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(ServletUser. class);
 
+	/**
+	 * loads the login jsp
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.debug("trying to connect");
 		this.getServletContext().getRequestDispatcher("/VIEW/login.jsp").forward(request, response);
 	}
 
+	/**
+	 * verify if the data entered in the login page are correct, and add a User object in the session 
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");

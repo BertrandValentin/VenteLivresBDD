@@ -1,14 +1,11 @@
 package be.atc.servlets;
 
-
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.log4j.Logger;
 
 import be.atc.connection.EMF;
 import be.atc.entities.Book;
@@ -19,8 +16,11 @@ import java.io.IOException;
 
 public class ServletDeleteBook extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(ServletUser. class);
 	
+	/**
+	 * verify if the connected user is an administrator, if not send back to the book list page.
+	 * recover the id of the book to delete, find it in db and send to a confirmation page.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
@@ -30,7 +30,6 @@ public class ServletDeleteBook extends HttpServlet {
 			return ;
 		}
 
-		log.debug("servlet delete book");
 		EntityManager em = EMF.getEM();
 		int idBookToDelete = Utilities.getInstance().convertStringRequestParameterToInt(request.getParameter("idBook"));
 		BookService bookService = new BookService(em);
@@ -41,6 +40,10 @@ public class ServletDeleteBook extends HttpServlet {
 		em.close();
 	}
 
+	/**
+	 * verify if the connected user is an administrator, if not send back to the book list page.
+	 * search for the book targeted in the database and delete it.
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");

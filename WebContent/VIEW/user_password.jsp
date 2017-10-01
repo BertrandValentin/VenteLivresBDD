@@ -24,7 +24,7 @@
 		</fieldset>
 	</form>
 	<br />
-	<a href="/VenteLivresBDD/profile">Annuler</a>
+	<a href="/VenteLivresBDD/profile">Retour au profile</a>
 	<br />
 	<c:out value="${errors}" />
 </body>

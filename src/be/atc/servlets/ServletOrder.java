@@ -9,35 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-/**
- * Servlet implementation class ServletOrder
- */
-@WebServlet("/ServletOrder")
+@WebServlet("/order")
 public class ServletOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(ServletOrder. class);
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ServletOrder() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//rediriger vers display_order.jsp
-		this.getServletContext().getRequestDispatcher("/WebContent/VIEW/display_order.jsp").forward(request, response);
-		log.debug("test");
+		log.debug("* get from oder *");
+		this.getServletContext().getRequestDispatcher("/VIEW/orders.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		log.debug("* post from order *");
 		doGet(request, response);
 	}
 }

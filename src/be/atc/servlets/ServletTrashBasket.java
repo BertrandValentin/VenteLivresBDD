@@ -11,6 +11,10 @@ import javax.servlet.http.HttpSession;
 public class ServletTrashBasket extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * empties the basket by setting in the session the basket to null, the total price to 0.0
+	 * redirect to the book list page
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		

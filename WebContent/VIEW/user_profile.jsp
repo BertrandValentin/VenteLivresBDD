@@ -61,7 +61,7 @@
 	<br />
 	<a href="/VenteLivresBDD/password">Modifier le mot de passe</a>
 	<br />
-	<a href="/VenteLivresBDD/book">Annuler</a>
+	<a href="/VenteLivresBDD/book">Retour</a>
 	<c:out value="${errors}" />
 </body>
 </html>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,7 +8,7 @@
 	<title>Livres</title>
 </head>
 <body>
-	<h1>all books</h1><br />
+	<h1>Vente de livres</h1><br />
 	
 	<a href="/VenteLivresBDD/ServletDisconnection">D&eacute;connexion</a>
 	<a href="/VenteLivresBDD/profile">Modifier le profile <c:out value="${user.getLastName()}" /></a>
@@ -36,6 +35,9 @@
 	</table>
 		<a href="/VenteLivresBDD/trashBasket" >
 			<input type="button" value="Vider le panier" />
+		</a>
+		<a href="/VenteLivresBDD/order" >
+			<input type="button" value="Confirmer la commande" />
 		</a>
 	<br />
 	<table>
